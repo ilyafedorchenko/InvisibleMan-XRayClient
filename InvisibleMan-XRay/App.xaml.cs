@@ -64,7 +64,6 @@ namespace InvisibleManXRay
         protected override void OnExit(ExitEventArgs e)
         {
             appManager.HandlersManager.GetHandler<NotifyHandler>().Dispose();
-            
             AppDomain.CurrentDomain.ProcessExit -= (sender, e) => CleanupBeforeExit();
             SystemEvents.SessionEnded -= (sender, e) => CleanupBeforeExit();
 
