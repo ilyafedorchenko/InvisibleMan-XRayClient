@@ -11,7 +11,7 @@ namespace InvisibleManXRay.Handlers
     using Services.Analytics.Notify;
     using Values;
 
-    public class NotifyHandler : Handler
+    public class NotifyHandler : Handler, IDisposable
     {
         private NotifyIcon notifyIcon;
 
@@ -181,6 +181,11 @@ namespace InvisibleManXRay.Handlers
         private void CheckItem(ToolStripMenuItem item)
         {
             item.Checked = true;
+        }
+
+        public void Dispose()
+        {
+            notifyIcon?.Dispose();
         }
     }
 }

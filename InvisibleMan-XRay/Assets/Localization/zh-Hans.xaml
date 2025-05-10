@@ -1,0 +1,150 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    
+    <FlowDirection x:Key="Lang.Direction">LeftToRight</FlowDirection>
+
+    <system:String x:Key="Lang.Run">运行</system:String>
+    <system:String x:Key="Lang.Stop">停止</system:String>
+    <system:String x:Key="Lang.Cancel">取消</system:String>
+
+    <system:String x:Key="Lang.Status.Stopped">已停止</system:String>
+    <system:String x:Key="Lang.Status.Running">运行中</system:String>
+    <system:String x:Key="Lang.Status.WaitForRun">等待运行</system:String>
+
+    <system:String x:Key="Lang.Button.Import">导入</system:String>
+    <system:String x:Key="Lang.Button.Confirm">确认</system:String>
+    <system:String x:Key="Lang.Button.Update">更新</system:String>
+    <system:String x:Key="Lang.Button.Cancel">取消</system:String>
+    <system:String x:Key="Lang.Button.TryAgain">重试</system:String>
+    <system:String x:Key="Lang.Button.Back">返回</system:String>
+    <system:String x:Key="Lang.Button.Close">关闭</system:String>
+    <system:String x:Key="Lang.Button.ChooseFile">选择文件</system:String>
+    
+    <system:String x:Key="Lang.Window.Main.ManageServerConfiguration">管理服务器配置</system:String>
+
+    <system:String x:Key="Lang.Window.About.WindowTitle">关于</system:String>
+    <system:String x:Key="Lang.Window.About.Title">关于</system:String>
+    <system:String x:Key="Lang.Window.About.Subtitle">关于 Invisible Man XRay</system:String>
+    <system:String x:Key="Lang.Window.About.ApplicationVersion">应用版本：</system:String>
+    <system:String x:Key="Lang.Window.About.XrayCoreVersion">Xray-core 版本：</system:String>
+    <system:String x:Key="Lang.Window.About.Description">是一个开源免费的支持 xray core 的客户端。它提供了易于使用的界面来配置和管理代理，并允许用户在不同的服务器位置之间切换。</system:String>
+    <system:String x:Key="Lang.Window.About.VisitWebsite">请访问我们的网站下载最新版本或获取帮助和信息。</system:String>
+    <system:String x:Key="Lang.Window.About.SubmitIssuePart1">如果您遇到任何问题或想要报告错误或建议，欢迎在我们的</system:String>
+    <system:String x:Key="Lang.Window.About.SubmitIssuePart2">问题追踪</system:String>
+    <system:String x:Key="Lang.Window.About.SubmitIssuePart3">区域提交。</system:String>
+    <system:String x:Key="Lang.Window.About.ContactUs">您也可以通过发送电子邮件联系我们。我们会尽快回复您！</system:String>
+    <system:String x:Key="Lang.Window.About.Thanks" xml:space="preserve">感谢使用 Invisible Man XRay&#10;希望您使用愉快</system:String>
+
+    <system:String x:Key="Lang.Window.Policy.WindowTitle">政策</system:String>
+    <system:String x:Key="Lang.Window.Policy.Title">政策</system:String>
+    <system:String x:Key="Lang.Window.Policy.Subtitle">数据分析政策</system:String>
+    <system:String x:Key="Lang.Window.Policy.DescriptionPart1">在</system:String>
+    <system:String x:Key="Lang.Window.Policy.DescriptionPart2">Invisible Man</system:String>
+    <system:String x:Key="Lang.Window.Policy.DescriptionPart3">，我们致力于为您提供卓越的用户体验。作为持续改进服务的一部分，我们使用分析数据来获取洞察并做出明智的决策，以造福所有用户。本政策概述了我们的数据分析方法和对保护您隐私的承诺。</system:String>
+    <system:String x:Key="Lang.Window.Policy.PurposeOfAnalyticsTitle">1. 分析目的：</system:String>
+    <system:String x:Key="Lang.Window.Policy.PurposeOfAnalyticsDescription">我们使用分析来更好地了解应用程序的使用情况，识别需要改进的领域，并优化我们的功能。通过分析用户行为模式，我们可以提升整体用户体验并使我们的应用程序更好地满足您的需求。</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataCollectionTitle">2. 数据收集：</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataCollectionDescription">我们收集的数据严格限于非个人的、汇总信息。这意味着我们不会收集或处理任何可以直接识别您身份的个人信息。我们尊重您的隐私并致力于保护您的个人数据。</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataAnonymizationTitle">3. 数据匿名化：</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataAnonymizationDescription">为确保您的隐私，我们收集的任何数据都会被匿名化和汇总。这意味着它会与其他用户的数据合并，无法追溯到任何特定个人。请放心，在整个分析过程中您的身份将完全保持匿名。</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataSecurityTitle">4. 数据安全：</system:String>
+    <system:String x:Key="Lang.Window.Policy.DataSecurityDescription">我们严肃对待您的数据安全。我们已实施行业标准的安全措施来保护我们收集的分析数据。我们的系统旨在防止未经授权的访问、使用或披露您的信息。</system:String>
+    <system:String x:Key="Lang.Window.Policy.ThirdPartyProvidersTitle">5. 第三方提供商：</system:String>
+    <system:String x:Key="Lang.Window.Policy.ThirdPartyProvidersDescription">我们使用 Google Analytics 作为第三方分析提供商来协助我们收集和分析数据。这个提供商经过精心选择，并符合我们的隐私和安全标准。</system:String>
+    <system:String x:Key="Lang.Window.Policy.YourChoicesTitle">6. 您的选择：</system:String>
+    <system:String x:Key="Lang.Window.Policy.YourChoicesDescription">我们尊重您控制数据的权利。如果您不希望参与我们的分析计划，可以随时通过应用程序设置选择退出。请注意，选择退出可能会影响我们提升您用户体验的能力。</system:String>
+    <system:String x:Key="Lang.Window.Policy.AcknowledgeAnalyticsUse">继续使用我们的应用程序，即表示您确认并同意我们按照本政策使用分析数据。如果您对我们的数据分析实践有任何问题或疑虑，请联系我们的支持团队：</system:String>
+    <system:String x:Key="Lang.Window.Policy.Thanks">感谢您选择 Invisible Man XRay。我们感谢您的信任，并期待为您提供卓越的用户体验。</system:String>
+
+    <system:String x:Key="Lang.Window.Server.WindowTitle">服务器配置</system:String>
+    <system:String x:Key="Lang.Window.Server.Title">服务器配置</system:String>
+    <system:String x:Key="Lang.Window.Server.Subtitle">管理服务器配置</system:String>
+    <system:String x:Key="Lang.Window.Server.Tab.Configuration">配置</system:String>
+    <system:String x:Key="Lang.Window.Server.Tab.Subscription">订阅</system:String>
+    <system:String x:Key="Lang.Window.Server.Import.File">导入配置文件</system:String>
+    <system:String x:Key="Lang.Window.Server.Import.Link">从链接导入</system:String>
+    <system:String x:Key="Lang.Window.Server.Import.Remarks">备注</system:String>
+    <system:String x:Key="Lang.Window.Server.Import.SubscriptionLink">订阅链接</system:String>
+
+    <system:String x:Key="Lang.Window.Settings.WindowTitle">设置</system:String>
+    <system:String x:Key="Lang.Window.Settings.Title">设置</system:String>
+    <system:String x:Key="Lang.Window.Settings.Subtitle">自定义您的设置</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tab.Basic">基本</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tab.Port">端口</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tab.TUN">TUN</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tab.Log">日志</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.Language">语言</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.Mode">模式</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.Protocol">协议</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.UseSystemProxy">使用系统代理</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.EnbleUdp">启用 UDP</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.SendAnalyticsPart1">允许应用程序发送</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.SendAnalyticsPart2">分析</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.SendAnalyticsPart3">事件</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.RunAtStartup">开机自动运行</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.StartHidden">启动时隐藏窗口</system:String>
+    <system:String x:Key="Lang.Window.Settings.Basic.AutoConnect">启动时自动连接</system:String>
+    <system:String x:Key="Lang.Window.Settings.Port.Proxy">代理端口</system:String>
+    <system:String x:Key="Lang.Window.Settings.Port.TUN">TUN 端口</system:String>
+    <system:String x:Key="Lang.Window.Settings.Port.Test">测试端口</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tun.DeviceIp">设备 IP</system:String>
+    <system:String x:Key="Lang.Window.Settings.Tun.Dns">DNS</system:String>
+    <system:String x:Key="Lang.Window.Settings.Log.Level">日志级别</system:String>
+    <system:String x:Key="Lang.Window.Settings.Log.Path">日志路径</system:String>
+
+    <system:String x:Key="Lang.Window.Update.WindowTitle">更新</system:String>
+    <system:String x:Key="Lang.Window.Update.Title">更新</system:String>
+    <system:String x:Key="Lang.Window.Update.Subtitle">检查更新</system:String>
+
+    <system:String x:Key="Lang.Config.Status.NotChecked">未检查</system:String>
+    <system:String x:Key="Lang.Config.Status.Timeout">超时</system:String>
+    <system:String x:Key="Lang.Config.Status.Available">可用</system:String>
+
+    <system:String x:Key="Lang.ToolTip.About">关于</system:String>
+    <system:String x:Key="Lang.ToolTip.Settings">设置</system:String>
+    <system:String x:Key="Lang.ToolTip.BugReporting">报告错误</system:String>
+    <system:String x:Key="Lang.ToolTip.CheckForUpdates">检查更新</system:String>
+    <system:String x:Key="Lang.ToolTip.SourceCodeOnGitHub">GitHub 源代码</system:String>
+    <system:String x:Key="Lang.ToolTip.AddNewConfiguration">添加新配置</system:String>
+    <system:String x:Key="Lang.ToolTip.AddNewSubscription">添加新订阅</system:String>
+    <system:String x:Key="Lang.ToolTip.Edit">编辑</system:String>
+    <system:String x:Key="Lang.ToolTip.Delete">删除</system:String>
+    <system:String x:Key="Lang.ToolTip.Log">日志</system:String>
+    <system:String x:Key="Lang.ToolTip.Share">分享</system:String>
+    <system:String x:Key="Lang.ToolTip.Check">检查</system:String>
+    <system:String x:Key="Lang.ToolTip.Update">更新</system:String>
+
+    <system:String x:Key="Lang.Notify.Open">打开主界面</system:String>
+    <system:String x:Key="Lang.Notify.Mode">代理模式</system:String>
+    <system:String x:Key="Lang.Notify.Update">检查更新</system:String>
+    <system:String x:Key="Lang.Notify.About">关于</system:String>
+    <system:String x:Key="Lang.Notify.Close">退出</system:String>
+
+    <system:String x:Key="Lang.Message.AppAlreadyRunning">应用程序已在运行。</system:String>
+    <system:String x:Key="Lang.Message.DeleteConfirmation">您确定要删除 {0} 吗？</system:String>
+    <system:String x:Key="Lang.Message.ConfigHint">点击加号添加新配置</system:String>
+    <system:String x:Key="Lang.Message.NoServerConfiguration">没有服务器配置</system:String>
+    <system:String x:Key="Lang.Message.ThereIsNoConfiguration">没有配置</system:String>
+    <system:String x:Key="Lang.Message.ThereIsNoSubscription">没有订阅</system:String>
+    <system:String x:Key="Lang.Message.NoFileChoosen">未选择文件...</system:String>
+    <system:String x:Key="Lang.Message.PleaseWait">请稍候...</system:String>
+    <system:String x:Key="Lang.Message.WaitingForServerResponse">等待服务器响应...</system:String>
+    <system:String x:Key="Lang.Message.UpdateAvailable">有新版本可用！</system:String>
+    <system:String x:Key="Lang.Message.YouHaveLatestVersion">您已经是最新版本</system:String>
+    <system:String x:Key="Lang.Message.CantConnectToServer">无法连接到服务器</system:String>
+    <system:String x:Key="Lang.Message.CantConnectToTunnelService">应用程序无法连接到隧道服务。</system:String>
+    <system:String x:Key="Lang.Message.CantProxySystem">应用程序无法代理系统。</system:String>
+    <system:String x:Key="Lang.Message.CantTunnelSystem">应用程序无法隧道系统。</system:String>
+    <system:String x:Key="Lang.Message.NoConfigsFound" xml:space="preserve">未找到配置。&#10;请添加新的服务器配置。</system:String>
+    <system:String x:Key="Lang.Message.InvalidConfig" xml:space="preserve">无效的配置。&#10;请重新检查。</system:String>
+    <system:String x:Key="Lang.Message.InvalidSubscription" xml:space="preserve">无效的订阅。&#10;请重新检查。</system:String>
+    <system:String x:Key="Lang.Message.NoConfigFileSelected" xml:space="preserve">未选择文件。&#10;添加服务器配置文件。</system:String>
+    <system:String x:Key="Lang.Message.NoConfigLinkEntered" xml:space="preserve">未输入链接。&#10;添加服务器配置链接。</system:String>
+    <system:String x:Key="Lang.Message.NoSubscriptionLinkEntered" xml:space="preserve">未输入链接。&#10;添加订阅链接。</system:String>
+    <system:String x:Key="Lang.Message.NoSubscriptionRemarksEntered" xml:space="preserve">未输入备注。&#10;请填写备注。</system:String>
+    <system:String x:Key="Lang.Message.FileDoesntExists" xml:space="preserve">此文件不存在。&#10;可能已被删除。</system:String>
+    <system:String x:Key="Lang.Message.UnsopportedConfigLink" xml:space="preserve">不支持此链接。&#10;请尝试其他配置链接。</system:String>
+    <system:String x:Key="Lang.Message.UnsopportedSubscriptionLink" xml:space="preserve">不支持此链接。&#10;请尝试其他订阅链接。</system:String>
+    <system:String x:Key="Lang.Message.NoLogFile" xml:space="preserve">此配置没有日志文件。&#10;您可以从设置菜单管理日志文件。</system:String>
+</ResourceDictionary>
