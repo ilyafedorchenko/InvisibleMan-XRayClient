@@ -35,6 +35,7 @@ namespace InvisibleManXRay
         private Action onGitHubClick;
         private Action onBugReportingClick;
         private Action<string> onCustomLinkClick;
+        private Action<bool> setIsRunning;
 
         private BackgroundWorker runWorker;
         private BackgroundWorker updateWorker;
@@ -123,6 +124,7 @@ namespace InvisibleManXRay
 
                     void HandleError()
                     {
+                        setIsRunning.Invoke(false);
                         if (IsAnotherWindowOpened())
                             return;
                         
@@ -233,7 +235,8 @@ namespace InvisibleManXRay
             Action onGenerateClientId,
             Action onGitHubClick,
             Action onBugReportingClick,
-            Action<string> onCustomLinkClick)
+            Action<string> onCustomLinkClick,
+            Action<bool> setIsRunning)
         {
             this.isNeedToShowPolicyWindow = isNeedToShowPolicyWindow;
             this.shouldStartHidden = shouldStartHidden;
@@ -256,6 +259,7 @@ namespace InvisibleManXRay
             this.onGitHubClick = onGitHubClick;
             this.onBugReportingClick = onBugReportingClick;
             this.onCustomLinkClick = onCustomLinkClick;
+            this.setIsRunning = setIsRunning;
 
             UpdateUI();
         }
@@ -301,6 +305,24 @@ namespace InvisibleManXRay
             isRerunRequest = true;
         }
 
+        
+        public void Connect()
+        {
+            if (runWorker.IsBusy)
+                return;
+
+            setIsRunning.Invoke(true);
+            runWorker.RunWorkerAsync();
+        }
+
+        public void Disconnect()
+        {
+            setIsRunning.Invoke(false);
+            onStopServer.Invoke();
+            onDisableMode.Invoke();
+            isRerunRequest = false;
+        }
+
         private void OnManageServersClick(object sender, RoutedEventArgs e)
         {
             OpenServerWindow();
@@ -309,18 +331,13 @@ namespace InvisibleManXRay
 
         private void OnRunButtonClick(object sender, RoutedEventArgs e)
         {
-            if (runWorker.IsBusy)
-                return;
-
-            runWorker.RunWorkerAsync();
+            Connect();
             AnalyticsService.SendEvent(new RunButtonClickedEvent());
         }
 
         private void OnStopButtonClick(object sender, RoutedEventArgs e)
         {
-            onStopServer.Invoke();
-            onDisableMode.Invoke();
-            isRerunRequest = false;
+            Disconnect();
             AnalyticsService.SendEvent(new StopButtonClickedEvent());
         }
 

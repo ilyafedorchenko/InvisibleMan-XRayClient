@@ -54,7 +54,8 @@ namespace InvisibleManXRay.Factories
                 onGenerateClientId: settingsHandler.GenerateClientId,
                 onGitHubClick: linkHandler.OpenGitHubRepositoryLink,
                 onBugReportingClick: linkHandler.OpenBugReportingLink,
-                onCustomLinkClick: linkHandler.OpenCustomLink
+                onCustomLinkClick: linkHandler.OpenCustomLink,
+                setIsRunning: isRunning => core.IsRunning = isRunning
             );
             
             return mainWindow;

@@ -115,6 +115,8 @@
     <system:String x:Key="Lang.ToolTip.Check">بررسی</system:String>
     <system:String x:Key="Lang.ToolTip.Update">بروزرسانی</system:String>
 
+    <system:String x:Key="Lang.Notify.Connect">اتصال</system:String>
+    <system:String x:Key="Lang.Notify.Disconnect">قطع ارتباط</system:String>
     <system:String x:Key="Lang.Notify.Open">باز کردن برنامه</system:String>
     <system:String x:Key="Lang.Notify.Mode">حالت</system:String>
     <system:String x:Key="Lang.Notify.Update">بررسی بروزرسانی</system:String>

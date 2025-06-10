@@ -41,7 +41,7 @@ namespace InvisibleManXRay.Managers.Initializers
             SetupTunnelHandler();
             SetupConfigHandler();
             SetupUpdateHandler();
-            SetupNotifyHandler();
+            SetupNotifyHandler(core);
             SetupDeepLinkHandler();
             SetupLocalizationHandler();
 
@@ -85,18 +85,20 @@ namespace InvisibleManXRay.Managers.Initializers
                 );
             }
 
-            void SetupNotifyHandler()
+            void SetupNotifyHandler(InvisibleManXRayCore core)
             {
                 SettingsHandler settingsHandler = handlersManager.GetHandler<SettingsHandler>();
 
                 handlersManager.GetHandler<NotifyHandler>().Setup(
                     getMode: settingsHandler.UserSettings.GetMode,
+                    isRunning: () => core.IsRunning,
                     onOpenClick: OpenApplication,
                     onUpdateClick: OpenUpdateWindow,
                     onAboutClick: OpenAboutWindow,
                     onCloseClick: CloseApplication,
-                    onProxyModeClick: () => { OnModeClick(Mode.PROXY); },
-                    onTunnelModeClick: () => { OnModeClick(Mode.TUN); }
+                    onProxyModeClick: () => OnModeClick(Mode.PROXY),
+                    onTunnelModeClick: () => OnModeClick(Mode.TUN),
+                    onSwitchClick: () => OnSwitchClick(core)
                 );
 
                 void CloseApplication()
@@ -136,6 +138,19 @@ namespace InvisibleManXRay.Managers.Initializers
                     mainWindow.TryDisableModeAndRerun();
                 }
             }
+
+            void OnSwitchClick(InvisibleManXRayCore core)
+            {
+                MainWindow mainWindow = windowFactory.GetMainWindow();
+                if (core.IsRunning)
+                {
+                    mainWindow.Disconnect();
+                }
+                else
+                {
+                    mainWindow.Connect();
+                }
+            } 
 
             void SetupDeepLinkHandler()
             {

@@ -12,6 +12,8 @@ namespace InvisibleManXRay.Core
 
     public class InvisibleManXRayCore
     {
+        public bool IsRunning { get; set; } = false;
+        
         private Func<Config> getConfig;
         private Func<Mode> getMode;
         private Func<Protocol> getProtocol;
