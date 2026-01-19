@@ -115,6 +115,8 @@
     <system:String x:Key="Lang.ToolTip.Check">检查</system:String>
     <system:String x:Key="Lang.ToolTip.Update">更新</system:String>
 
+    <system:String x:Key="Lang.Notify.Connect">连接</system:String>
+    <system:String x:Key="Lang.Notify.Disconnect">断开连接</system:String>
     <system:String x:Key="Lang.Notify.Open">打开主界面</system:String>
     <system:String x:Key="Lang.Notify.Mode">代理模式</system:String>
     <system:String x:Key="Lang.Notify.Update">检查更新</system:String>
