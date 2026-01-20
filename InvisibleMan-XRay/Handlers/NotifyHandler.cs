@@ -52,8 +52,8 @@ namespace InvisibleManXRay.Handlers
 
         public void UpdateConnectionStatus(bool isRunning)
         {
-            string switchConnectionLocalizationKey = isRunning ? Localization.NOTIFY_DISCONNECT : Localization.NOTIFY_CONNECT;
-            ToolStripItem switchConnectionMenuItem = notifyIcon.ContextMenuStrip.Items.Find(Localization.NOTIFY_CONNECT, false).First();
+            string switchConnectionLocalizationKey = isRunning ? Localization.NOTIFY_STOP : Localization.NOTIFY_RUN;
+            ToolStripItem switchConnectionMenuItem = notifyIcon.ContextMenuStrip.Items.Find(Localization.NOTIFY_RUN, false).First();
             switchConnectionMenuItem.Text = LocalizationService.GetTerm(switchConnectionLocalizationKey);
         }
 
@@ -103,7 +103,7 @@ namespace InvisibleManXRay.Handlers
             };
 
             AddMenuItem(Localization.NOTIFY_OPEN, LocalizationService.GetTerm(Localization.NOTIFY_OPEN), OnOpenClick);
-            AddMenuItem(Localization.NOTIFY_CONNECT, LocalizationService.GetTerm(Localization.NOTIFY_CONNECT), OnSwitchConnectionClick);
+            AddMenuItem(Localization.NOTIFY_RUN, LocalizationService.GetTerm(Localization.NOTIFY_RUN), OnSwitchConnectionClick);
             AddMenuItem(Localization.NOTIFY_MODE, LocalizationService.GetTerm(Localization.NOTIFY_MODE), delegate { }, modeItems.Values.ToArray());
             AddMenuItem(Localization.NOTIFY_UPDATE, LocalizationService.GetTerm(Localization.NOTIFY_UPDATE), OnUpdateClick);
             AddMenuItem(Localization.NOTIFY_ABOUT, LocalizationService.GetTerm(Localization.NOTIFY_ABOUT), OnAboutClick);
