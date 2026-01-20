@@ -41,7 +41,7 @@ namespace InvisibleManXRay.Managers.Initializers
             SetupTunnelHandler();
             SetupConfigHandler();
             SetupUpdateHandler();
-            SetupNotifyHandler(core);
+            SetupNotifyHandler();
             SetupDeepLinkHandler();
             SetupLocalizationHandler();
 
@@ -85,20 +85,19 @@ namespace InvisibleManXRay.Managers.Initializers
                 );
             }
 
-            void SetupNotifyHandler(InvisibleManXRayCore core)
+            void SetupNotifyHandler()
             {
                 SettingsHandler settingsHandler = handlersManager.GetHandler<SettingsHandler>();
 
                 handlersManager.GetHandler<NotifyHandler>().Setup(
                     getMode: settingsHandler.UserSettings.GetMode,
-                    isRunning: () => core.IsRunning,
                     onOpenClick: OpenApplication,
                     onUpdateClick: OpenUpdateWindow,
                     onAboutClick: OpenAboutWindow,
                     onCloseClick: CloseApplication,
                     onProxyModeClick: () => OnModeClick(Mode.PROXY),
                     onTunnelModeClick: () => OnModeClick(Mode.TUN),
-                    onSwitchClick: () => OnSwitchClick(core)
+                    onSwitchConnectionClick: () => OnSwitchConnectionClick()
                 );
 
                 void CloseApplication()
@@ -139,17 +138,10 @@ namespace InvisibleManXRay.Managers.Initializers
                 }
             }
 
-            void OnSwitchClick(InvisibleManXRayCore core)
+            void OnSwitchConnectionClick()
             {
                 MainWindow mainWindow = windowFactory.GetMainWindow();
-                if (core.IsRunning)
-                {
-                    mainWindow.Disconnect();
-                }
-                else
-                {
-                    mainWindow.Connect();
-                }
+                mainWindow.SwitchConnection();
             } 
 
             void SetupDeepLinkHandler()

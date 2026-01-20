@@ -31,6 +31,7 @@ namespace InvisibleManXRay.Factories
             BroadcastHandler broadcastHandler = handlersManager.GetHandler<BroadcastHandler>();
             SettingsHandler settingsHandler = handlersManager.GetHandler<SettingsHandler>();
             LinkHandler linkHandler = handlersManager.GetHandler<LinkHandler>();
+            NotifyHandler notifyHandler = handlersManager.GetHandler<NotifyHandler>();
 
             MainWindow mainWindow = new MainWindow();
             mainWindow.Setup(
@@ -55,7 +56,7 @@ namespace InvisibleManXRay.Factories
                 onGitHubClick: linkHandler.OpenGitHubRepositoryLink,
                 onBugReportingClick: linkHandler.OpenBugReportingLink,
                 onCustomLinkClick: linkHandler.OpenCustomLink,
-                setIsRunning: isRunning => core.IsRunning = isRunning
+                onChangeRunningStatus: notifyHandler.UpdateConnectionStatus
             );
             
             return mainWindow;

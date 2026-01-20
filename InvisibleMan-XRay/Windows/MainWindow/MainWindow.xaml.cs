@@ -12,6 +12,8 @@ namespace InvisibleManXRay
 
     public partial class MainWindow : Window
     {
+        private enum ConnectionStatus { STOPPED, WAITING, RUNNING }
+
         private bool isRerunRequest;
 
         private Func<bool> isNeedToShowPolicyWindow;
@@ -35,7 +37,7 @@ namespace InvisibleManXRay
         private Action onGitHubClick;
         private Action onBugReportingClick;
         private Action<string> onCustomLinkClick;
-        private Action<bool> setIsRunning;
+        private Action<bool> onChangeRunningStatus;
 
         private BackgroundWorker runWorker;
         private BackgroundWorker updateWorker;
@@ -124,7 +126,6 @@ namespace InvisibleManXRay
 
                     void HandleError()
                     {
-                        setIsRunning.Invoke(false);
                         if (IsAnotherWindowOpened())
                             return;
                         
@@ -236,7 +237,8 @@ namespace InvisibleManXRay
             Action onGitHubClick,
             Action onBugReportingClick,
             Action<string> onCustomLinkClick,
-            Action<bool> setIsRunning)
+            Action<bool> onChangeRunningStatus
+        )
         {
             this.isNeedToShowPolicyWindow = isNeedToShowPolicyWindow;
             this.shouldStartHidden = shouldStartHidden;
@@ -259,7 +261,7 @@ namespace InvisibleManXRay
             this.onGitHubClick = onGitHubClick;
             this.onBugReportingClick = onBugReportingClick;
             this.onCustomLinkClick = onCustomLinkClick;
-            this.setIsRunning = setIsRunning;
+            this.onChangeRunningStatus = onChangeRunningStatus;
 
             UpdateUI();
         }
@@ -305,22 +307,22 @@ namespace InvisibleManXRay
             isRerunRequest = true;
         }
 
-        
-        public void Connect()
+        public void SwitchConnection()
         {
-            if (runWorker.IsBusy)
-                return;
+            ConnectionStatus status = GetCurrentConnectionStatus();
 
-            setIsRunning.Invoke(true);
-            runWorker.RunWorkerAsync();
-        }
-
-        public void Disconnect()
-        {
-            setIsRunning.Invoke(false);
-            onStopServer.Invoke();
-            onDisableMode.Invoke();
-            isRerunRequest = false;
+            switch(status)
+            {
+                case ConnectionStatus.RUNNING:
+                    OnStopButtonClick(null, null);
+                    break;
+                case ConnectionStatus.WAITING:
+                    OnCancelButtonClick(null, null);
+                    break;
+                default:
+                    OnRunButtonClick(null, null);
+                    break;
+            }
         }
 
         private void OnManageServersClick(object sender, RoutedEventArgs e)
@@ -331,13 +333,18 @@ namespace InvisibleManXRay
 
         private void OnRunButtonClick(object sender, RoutedEventArgs e)
         {
-            Connect();
+            if (runWorker.IsBusy)
+                return;
+
+            runWorker.RunWorkerAsync();
             AnalyticsService.SendEvent(new RunButtonClickedEvent());
         }
 
         private void OnStopButtonClick(object sender, RoutedEventArgs e)
         {
-            Disconnect();
+            onStopServer.Invoke();
+            onDisableMode.Invoke();
+            isRerunRequest = false;
             AnalyticsService.SendEvent(new StopButtonClickedEvent());
         }
 
@@ -450,6 +457,8 @@ namespace InvisibleManXRay
             buttonStop.Visibility = Visibility.Visible;
             buttonCancel.Visibility = Visibility.Hidden;
             buttonRun.Visibility = Visibility.Hidden;
+
+            onChangeRunningStatus.Invoke(true);
         }
 
         private void ShowStopStatus()
@@ -461,6 +470,8 @@ namespace InvisibleManXRay
             buttonRun.Visibility = Visibility.Visible;
             buttonCancel.Visibility = Visibility.Hidden;
             buttonStop.Visibility = Visibility.Hidden;
+
+            onChangeRunningStatus.Invoke(false);
         }
 
         private void ShowWaitForRunStatus()
@@ -472,6 +483,19 @@ namespace InvisibleManXRay
             buttonCancel.Visibility = Visibility.Visible;
             buttonRun.Visibility = Visibility.Hidden;
             buttonStop.Visibility = Visibility.Hidden;
+
+            onChangeRunningStatus.Invoke(true);
+        }
+
+        private ConnectionStatus GetCurrentConnectionStatus()
+        {
+            if (statusWaitForRun.Visibility == Visibility.Visible)
+                return ConnectionStatus.WAITING;
+            
+            if (statusRun.Visibility == Visibility.Visible)
+                return ConnectionStatus.RUNNING;
+            
+            return ConnectionStatus.STOPPED;
         }
 
         protected override void OnClosing(CancelEventArgs e)
