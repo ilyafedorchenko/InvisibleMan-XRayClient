@@ -17,10 +17,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Assets/Icon.ico</ApplicationIcon>
     <PublishSingleFile>true</PublishSingleFile>
-    <_SuppressWpfTrimError>true</_SuppressWpfTrimError>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>partial</TrimMode>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>

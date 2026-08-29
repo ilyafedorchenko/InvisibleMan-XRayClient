@@ -8,3 +8,5 @@ This fork keeps the original Invisible Man XRay 3.2.5 interface and makes two ta
 The GitHub Actions workflow builds `XRayCore.dll`, runs a VLESS configuration smoke test, publishes the self-contained Windows x64 application, adds the official Invisible Man TUN v0.3.5 files and current `geoip.dat` / `geosite.dat`, and creates a ZIP with a SHA-256 checksum.
 
 The resulting application is not code-signed. Windows SmartScreen may display an unknown publisher warning.
+
+Trimming is disabled because the application combines WPF and Windows Forms; .NET 7 does not support trimming Windows Forms applications safely.
