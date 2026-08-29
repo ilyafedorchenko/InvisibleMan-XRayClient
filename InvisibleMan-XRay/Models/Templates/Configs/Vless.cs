@@ -102,19 +102,6 @@ namespace InvisibleManXRay.Models.Templates.Configs
         {
             get
             {
-                if (Adapter.streamSecurity == "reality")
-                {
-                    if (string.IsNullOrEmpty(Adapter.flow))
-                        Adapter.flow = "xtls-rprx-vision";
-                }
-                else if (Adapter.streamSecurity == "xtls")
-                {
-                    if (string.IsNullOrEmpty(Adapter.flow))
-                        Adapter.flow = "xtls-rprx-origin";
-                    else
-                        Adapter.flow = Adapter.flow.Replace("splice", "direct");
-                }
-
                 return new V2Ray.Outbound.Settings() {
                     vnext = new V2Ray.Outbound.Settings.Vnext[] {
                         new V2Ray.Outbound.Settings.Vnext() {

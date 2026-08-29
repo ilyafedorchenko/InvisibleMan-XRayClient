@@ -1,0 +1,105 @@
+name: Build Windows x64
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/fix-grpc-reality-xray-26.3.27
+
+permissions:
+  contents: read
+
+env:
+  GO_VERSION: 1.26.1
+  DOTNET_VERSION: 7.0.x
+  TUN_VERSION: v0.3.5
+  PACKAGE_NAME: InvisibleManXRay-x64-v3.2.5.1-xray26.3.27
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: XRay-Wrapper/go.sum
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Test Xray wrapper
+        working-directory: XRay-Wrapper
+        run: go test ./...
+
+      - name: Build XrayCore.dll
+        working-directory: XRay-Wrapper
+        run: |
+          New-Item -ItemType Directory -Force ..\InvisibleMan-XRay\Libraries | Out-Null
+          go build --buildmode=c-shared -o ..\InvisibleMan-XRay\Libraries\XRayCore.dll -trimpath -ldflags "-s -w -buildid=" .
+
+      - name: Test VLESS link conversion
+        run: dotnet run --project Tests\ConfigSmoke\ConfigSmoke.csproj -c Release
+
+      - name: Download runtime assets
+        shell: pwsh
+        run: |
+          $tunUrl = "https://github.com/InvisibleManVPN/InvisibleMan-TUN/releases/download/${env:TUN_VERSION}/InvisibleManTUN-x64.zip"
+          Invoke-WebRequest -Uri $tunUrl -OutFile "$env:RUNNER_TEMP\tun.zip"
+          New-Item -ItemType Directory -Force "$env:RUNNER_TEMP\tun" | Out-Null
+          Expand-Archive -Path "$env:RUNNER_TEMP\tun.zip" -DestinationPath "$env:RUNNER_TEMP\tun" -Force
+
+          Invoke-WebRequest -Uri "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat" -OutFile "InvisibleMan-XRay\geoip.dat"
+          Invoke-WebRequest -Uri "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat" -OutFile "InvisibleMan-XRay\geosite.dat"
+
+      - name: Publish Windows x64 app
+        shell: pwsh
+        run: |
+          $publishDir = "$env:RUNNER_TEMP\publish"
+          dotnet publish "InvisibleMan-XRay\InvisibleMan-XRay.csproj" `
+            --configuration Release `
+            --runtime win-x64 `
+            --self-contained true `
+            --output $publishDir
+
+          New-Item -ItemType Directory -Force "$publishDir\TUN" | Out-Null
+          Copy-Item "$env:RUNNER_TEMP\tun\*" "$publishDir\TUN" -Recurse -Force
+
+          $requiredFiles = @(
+            "$publishDir\Invisible Man XRay.exe",
+            "$publishDir\Libraries\XRayCore.dll",
+            "$publishDir\TUN\InvisibleMan-TUN.exe",
+            "$publishDir\TUN\tun.dll",
+            "$publishDir\TUN\tun2socks.exe",
+            "$publishDir\TUN\wintun.dll",
+            "$publishDir\geoip.dat",
+            "$publishDir\geosite.dat"
+          )
+          foreach ($file in $requiredFiles) {
+            if (-not (Test-Path $file)) {
+              throw "Required release file is missing: $file"
+            }
+          }
+
+      - name: Package release
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          $zip = "artifacts\${env:PACKAGE_NAME}.zip"
+          Compress-Archive -Path "$env:RUNNER_TEMP\publish\*" -DestinationPath $zip -CompressionLevel Optimal
+          $hash = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+          "$hash  ${env:PACKAGE_NAME}.zip" | Set-Content -Encoding ascii "artifacts\${env:PACKAGE_NAME}.zip.sha256"
+          Get-ChildItem artifacts | Format-Table Name, Length
+
+      - name: Upload release package
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+          path: artifacts/*
+          if-no-files-found: error
