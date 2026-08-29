@@ -11,7 +11,7 @@ permissions:
 
 env:
   GO_VERSION: 1.26.1
-  DOTNET_VERSION: 7.0.x
+  DOTNET_VERSION: 7.0.410
   TUN_VERSION: v0.3.5
   PACKAGE_NAME: InvisibleManXRay-x64-v3.2.5.1-xray26.3.27
 
