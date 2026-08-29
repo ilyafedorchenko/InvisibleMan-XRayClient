@@ -4,3 +4,4 @@
 *.dll
 *.dat
 *.exe
+.DS_Store
